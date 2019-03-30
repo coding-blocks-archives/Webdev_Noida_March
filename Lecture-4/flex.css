@@ -24,3 +24,19 @@
 .box5 {
     background-color: violet;
 }
+
+@media screen and (max-width: 480px) {
+    .box {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 720px) {
+    .box1 {
+        width: 100%;
+    }
+    .box2,.box3, .box4, .box5 {
+        width: 50%;
+    }
+} 
+
