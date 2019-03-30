@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.box {
+    width: 400px;
+    height: 400px;
+}
+
+.box1 {
+   background-color: aquamarine;
+}
+.box2 {
+    background-color: brown;
+}
+.box3 {
+    background-color: cadetblue;
+}
+.box4 {
+    background-color: crimson;
+}
+.box5 {
+    background-color: violet;
+}

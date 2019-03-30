@@ -1,0 +1,27 @@
+body {
+    margin:0;
+}
+.box {
+    background-color: gainsboro;
+    border-bottom: 1px solid #dedede;
+    height: 100%;
+    font-size: 22px;
+    padding: 20px;
+}
+
+.small-box {
+    margin-left: 15px;
+    display: inline;
+}
+
+.small-box:hover {
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    color: gray;
+}
+
+@media screen and (max-width: 470px) {
+    .small-box {
+        display: block;
+    }
+}
