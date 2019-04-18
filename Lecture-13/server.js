@@ -6,9 +6,16 @@ app.use('/', express.static('public'));
  * @endppoint add: Adding item into tasks array
  */
 app.get('/add', function(req,res){
-    console.log(req.query);
-    tasks.push(req.query.q);
-    res.sendStatus(200);
+    try{
+        console.log(req.query);
+        tasks.push(req.query.q);
+        res.sendStatus(200);
+
+    }
+    catch(e){
+        res.sendStatus(200);
+    }
+  
 });
 
 app.get('/data', function(req,res){
