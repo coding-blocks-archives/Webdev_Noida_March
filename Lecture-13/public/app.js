@@ -38,7 +38,7 @@
     }
    
     function getArray(){
-        var taskList =  JSON.parse(localStorage.getItem('task') ) || [];
+        taskList =  JSON.parse(localStorage.getItem('task') ) || [];
         if(taskList.length === 0) {
             fetch(`/data`, { mode: 'no-cors' })
             .then(function(data){
