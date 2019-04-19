@@ -13,13 +13,15 @@ app.use(bodyParser.text());
  */
 app.post('/add', function(req,res){
     try{
-        var bod = JSON.parse(req.body);
-        console.log(bod.todo);
-       // tasks.push(req.body);
+        var bod = req.body;
+        console.log(req.headers);
+        console.log(req.body);
+        tasks.push(req.body.todo);
         res.sendStatus(200);
 
     }
     catch(e){
+        console.log(e);
         res.sendStatus(200);
     }
   
@@ -28,6 +30,12 @@ app.post('/add', function(req,res){
 app.get('/data', function(req,res){
     res.send(tasks);
 })
+
+app.post('/del', function(req, res){
+   let index = req.body.id;
+   tasks.splice(index,1);
+   res.send(tasks);
+});
 
 app.listen(5000, function(){
     console.log('Server running on port 5000');

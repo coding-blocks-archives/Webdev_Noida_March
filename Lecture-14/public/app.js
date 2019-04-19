@@ -14,6 +14,7 @@
         display(val);
         fetch(`/add`, { 
             method: 'POST',
+            headers: new Headers({'content-type': 'application/json'}),
             body: JSON.stringify({"todo": val})
          })
             .then(function(data){
@@ -36,10 +37,59 @@
     function display(inf){
         let p = document.createElement('p');
         let data = document.createTextNode(inf);
-        p.appendChild(data);
+        let span = document.createElement('span');
+        let btn = document.createElement('button');
+        let btnText = document.createTextNode('delete');
+        btn.addEventListener('click', deleteNode);
+        btn.appendChild(btnText);
+        span.appendChild(data);
+        p.appendChild(span);
+        p.appendChild(btn);
         result.prepend(p);
     }
    
+    function deleteNode(){
+       let that = this; 
+       var eltext = this.previousSibling.textContent;
+       var index = taskList.indexOf(eltext);
+       delfromServer(index)
+         .then(function(data){
+            that.parentNode.remove();
+            console.log(data);
+         })
+      
+    }
+
+    function delfromServer(ind) {
+        return new Promise(function(resolve, reject){
+            fetch(`/del`, { 
+                method: 'POST',
+                headers: new Headers({'content-type': 'application/json'}),
+                body: JSON.stringify({"id": ind})
+             })
+                .then(function(data){
+                    if(data.status !== 200) {
+                        console.error('Internal Server Error')
+                        return;
+                    }
+                    data.json()
+                        .then(function(d){
+                          loader.style.display = 'none'; 
+                          result.style.backgroundColor = '#0000003b';
+                          taskList = d;
+                          resolve(d)
+                          localStorage.setItem('task', JSON.stringify(taskList));
+                        //   display(d);
+                        })
+                }).catch(function(e){
+                    console.log(e);
+                    reject(d);
+                })
+        })
+       
+    }
+
+
     function getArray(){
         taskList =  JSON.parse(localStorage.getItem('task') ) || [];
         if(taskList.length === 0) {
