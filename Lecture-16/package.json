@@ -1,0 +1,20 @@
+{
+  "name": "lecture-16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "mongodb": "^3.2.3"
+  }
+}
+
+// npm init
+// npm link express
+// npm install body-parser
+// npm install mongodb

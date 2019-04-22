@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        body {
+            background: #0000003b;
+            font-family: 'Poppins', sans-serif;
+        }
+            .lds-hourglass {
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        }
+        .lds-hourglass:after {
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        margin: 6px;
+        box-sizing: border-box;
+        border: 26px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-hourglass 1.2s infinite;
+        }
+        @keyframes lds-hourglass {
+        0% {
+            transform: rotate(0);
+            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        }
+        50% {
+            transform: rotate(900deg);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        100% {
+            transform: rotate(1800deg);
+        }
+        }
+
+        .lds-hourglass {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            display: none;
+        }
+
+        #result {
+            padding: 10px;
+            min-height: 100vh;
+            margin-top: 20px;
+        }
+
+        input, button {
+            font-family: inherit;
+        }
+
+        #btn {
+            color: #212146;
+            font-size: 21px;
+            position: relative;
+            top: 5px;
+        }
+
+        #btn:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <input type='text' id='inp'>
+    <i class="fas fa-arrow-circle-right" id='btn'></i>
+    <div class="lds-hourglass" id='loader'></div>
+    <div id='result'></div>
+    <script src="app.js"></script>
+</body>
+</html>
