@@ -18,7 +18,10 @@ app.post('/add', function(req,res){
         console.log(req.headers);
         console.log(req.body);
         tasks.push(req.body.todo);
-        res.send(req.body.todo);
+        db.insertDocs(req.body.todo, function(){
+            res.send(req.body.todo);
+        });
+      
 
     }
     catch(e){

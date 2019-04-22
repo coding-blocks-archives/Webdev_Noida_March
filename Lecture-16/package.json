@@ -13,8 +13,3 @@
     "mongodb": "^3.2.3"
   }
 }
-
-// npm init
-// npm link express
-// npm install body-parser
-// npm install mongodb

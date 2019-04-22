@@ -11,17 +11,17 @@ function  connect(){
         console.log("Connected successfully to server");
         const db = client.db(dbName);
         collection = db.collection('todocollection');
-
-        insertDocs();
       });
 }
 
-function insertDocs(){
-    collection.insertMany([{a:1}, {b:2}, {c:3}], function(err, result){
+function insertDocs(task, cb){
+    collection.insertMany([{a:task}], function(err, result){
        console.log(result);
+       cb();
     });
 }
 
 module.exports = {
-    connect: connect
+    connect: connect,
+    insertDocs: insertDocs
 }
