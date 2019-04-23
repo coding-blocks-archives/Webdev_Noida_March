@@ -3,6 +3,7 @@ var bodyParser = require('body-parser')
 const app = express();
 const db = require('./db');
 let tasks = [];
+
 app.use('/', express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,13 +36,31 @@ app.get('/data', function(req,res){
     res.send(tasks);
 })
 
+
 app.post('/del', function(req, res){
    let index = req.body.id;
    tasks.splice(index,1);
    res.send(tasks);
 });
 
+app.get('/tasks', function(req,res){
+  db.getTasks(function(result){
+      res.send(result);
+  })
+});
+
+function refilling(){
+    db.getTasks(function(result){
+        result.forEach(function(i){
+            tasks.push(i.a);
+        })
+    })
+    
+}
+
 app.listen(5000, function(){
     console.log('Server running on port 5000');
-    db.connect();
+    db.connect(function(){
+        refilling();
+    });
 })

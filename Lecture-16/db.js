@@ -1,16 +1,15 @@
 const MongoDb = require('mongodb').MongoClient;
-const username = 'aayush';
-const password = 'abc123';
-const url = `mongodb://${username}:${password}@ds145456.mlab.com:45456/todolist`;
+const url = 'mongodb://localhost:27017';
 let collection = '';
 const dbName = 'todolist';
  
 
-function  connect(){
+function  connect(cb){
     MongoDb.connect(url, function(err, client) {
         console.log("Connected successfully to server");
         const db = client.db(dbName);
         collection = db.collection('todocollection');
+        cb();
       });
 }
 
@@ -21,7 +20,14 @@ function insertDocs(task, cb){
     });
 }
 
+function getTasks(cb){
+  collection.find({}).toArray(function(err, result){
+      cb(result);
+  })
+}
+
 module.exports = {
     connect: connect,
-    insertDocs: insertDocs
+    insertDocs: insertDocs,
+    getTasks: getTasks
 }
