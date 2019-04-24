@@ -17,7 +17,7 @@ app.post('/add', function(req,res){
         console.log(req.headers);
         console.log(req.body);
         tasks.push(req.body.todo);
-        res.sendStatus(200);
+        res.send(req.body.todo);
 
     }
     catch(e){

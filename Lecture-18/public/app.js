@@ -10,17 +10,17 @@
         loader.style.display = 'block';
         var val = inp.value;
       
-        fetch(`/add`, { 
+        fetch(`/todo`, { 
             method: 'POST',
             headers: new Headers({'content-type': 'application/json'}),
-            body: JSON.stringify({"todo": val})
+            body: JSON.stringify({"task": val, "bool": false })
          })
             .then(function(data){
                 if(data.status !== 200) {
                     console.error('Internal Server Error')
                     return;
                 }
-                data.text()
+                data.json()
                     .then(function(d){
                       loader.style.display = 'none'; 
                       result.style.backgroundColor = '#0000003b';
@@ -36,16 +36,22 @@
     }
     function display(inf){
         let p = document.createElement('p');
-        let data = document.createTextNode(inf);
+        console.log(inf.id);
+        let data = document.createTextNode(inf.name);
         let span = document.createElement('span');
         let btn = document.createElement('button');
         let btnText = document.createTextNode('delete');
+        let check = document.createElement('input');
+        p.setAttribute('id', inf.id);
+        check.setAttribute('type', 'checkbox');
         btn.addEventListener('click', deleteNode);
+        check.addEventListener('change', checkState);
         btn.appendChild(btnText);
         span.appendChild(data);
+        p.appendChild(check);
         p.appendChild(span);
         p.appendChild(btn);
-        result.prepend(p);
+        result.appendChild(p);
     }
    
     function deleteNode(){
@@ -58,6 +64,35 @@
             console.log(data);
          })
       
+    }
+
+    function checkState(event){
+        let state = event.target.checked;
+        let id = this.parentNode.id;
+        fetch(`/update`, { 
+            method: 'POST',
+            headers: new Headers({'content-type': 'application/json'}),
+            body: JSON.stringify({"bool": state, "id": id })
+         })
+            .then(function(data){
+                if(data.status !== 200) {
+                    console.error('Internal Server Error')
+                    return;
+                }
+                data.text()
+                    .then(function(d){
+                        console.log(d);
+                    //   loader.style.display = 'none'; 
+                    //   result.style.backgroundColor = '#0000003b';
+                    //   console.log(d); 
+                    //   taskList.push(d);
+                      //display(d);
+                    //   localStorage.setItem('task', JSON.stringify(taskList));
+                    //   display(d);
+                    })
+            }).catch(function(e){
+                console.log(e);
+            })
     }
 
     function delfromServer(ind) {

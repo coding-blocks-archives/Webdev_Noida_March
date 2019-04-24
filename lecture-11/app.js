@@ -1,20 +1,17 @@
-var a = 4;
 (function(){
-    var inp = document.getElementById('inp');
     var btn = document.getElementById('btn');
     var result = document.getElementById('result');
     var loader = document.getElementById('loader');
-
-
-    function networkRequest(val){
+    var url = 'https://api.darksky.net/forecast/23d0c959cf01620646340bbf2afbe08b/37.8267,-122.4233'
+    function networkRequest(){
         result.style.backgroundColor = '#030303c4';
         loader.style.display = 'block';
-        fetch('http://numbersapi.com/' + val)
+        fetch(url, { mode: 'no-cors' })
             .then(function(data){
                 if(data.status !== 200) {
                     return;
                 }
-                data.text()
+                data.json()
                     .then(function(d){
                       loader.style.display = 'none'; 
                       result.style.backgroundColor = '#0000003b';
@@ -30,8 +27,7 @@ var a = 4;
     }
    
     btn.onclick = function(){
-        var value = inp.value;
-        networkRequest(value);
+        networkRequest();
 
     }
 })()
